@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 -- start query 1 in stream 0 using template query60.tpl and seed 1930872976
+=======
+>>>>>>> initial commit after forking
 with ss as (
  select
           i_item_id,sum(ss_ext_sales_price) total_sales
  from
+<<<<<<< HEAD
  	store_sales,
  	date_dim,
          customer_address,
@@ -12,6 +16,17 @@ with ss as (
   i_item_id
 from
  item
+=======
+        store_sales,
+        date_dim,
+         customer_address,
+         item
+ where
+         item.i_item_id in (select
+  i.i_item_id
+from
+ item i
+>>>>>>> initial commit after forking
 where i_category in ('Children'))
  and     ss_item_sk              = i_item_sk
  and     ss_sold_date_sk         = d_date_sk
@@ -24,6 +39,7 @@ where i_category in ('Children'))
  select
           i_item_id,sum(cs_ext_sales_price) total_sales
  from
+<<<<<<< HEAD
  	catalog_sales,
  	date_dim,
          customer_address,
@@ -33,6 +49,17 @@ where i_category in ('Children'))
   i_item_id
 from
  item
+=======
+        catalog_sales,
+        date_dim,
+         customer_address,
+         item
+ where
+         item.i_item_id               in (select
+  i.i_item_id
+from
+ item i
+>>>>>>> initial commit after forking
 where i_category in ('Children'))
  and     cs_item_sk              = i_item_sk
  and     cs_sold_date_sk         = d_date_sk
@@ -45,6 +72,7 @@ where i_category in ('Children'))
  select
           i_item_id,sum(ws_ext_sales_price) total_sales
  from
+<<<<<<< HEAD
  	web_sales,
  	date_dim,
          customer_address,
@@ -54,6 +82,17 @@ where i_category in ('Children'))
   i_item_id
 from
  item
+=======
+        web_sales,
+        date_dim,
+         customer_address,
+         item
+ where
+         item.i_item_id               in (select
+  i.i_item_id
+from
+ item i
+>>>>>>> initial commit after forking
 where i_category in ('Children'))
  and     ws_item_sk              = i_item_sk
  and     ws_sold_date_sk         = d_date_sk
@@ -74,5 +113,8 @@ where i_category in ('Children'))
  order by i_item_id
       ,total_sales
  limit 100;
+<<<<<<< HEAD
 
 -- end query 1 in stream 0 using template query60.tpl
+=======
+>>>>>>> initial commit after forking

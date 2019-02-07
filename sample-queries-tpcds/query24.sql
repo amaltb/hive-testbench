@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 -- start query 1 in stream 0 using template query24.tpl and seed 1220860970
+=======
+>>>>>>> initial commit after forking
 with ssales as
 (select c_last_name
       ,c_first_name
@@ -22,8 +25,12 @@ where ss_ticket_number = sr_ticket_number
   and ss_customer_sk = c_customer_sk
   and ss_item_sk = i_item_sk
   and ss_store_sk = s_store_sk
+<<<<<<< HEAD
   and c_current_addr_sk = ca_address_sk
   and c_birth_country <> upper(ca_country)
+=======
+  and c_birth_country = upper(ca_country)
+>>>>>>> initial commit after forking
   and s_zip = ca_zip
 and s_market_id=7
 group by c_last_name
@@ -48,5 +55,8 @@ group by c_last_name
 having sum(netpaid) > (select 0.05*avg(netpaid)
                                  from ssales)
 ;
+<<<<<<< HEAD
 
 -- end query 1 in stream 0 using template query24.tpl
+=======
+>>>>>>> initial commit after forking

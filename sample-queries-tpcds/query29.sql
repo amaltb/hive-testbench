@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 -- start query 1 in stream 0 using template query29.tpl and seed 2031708268
+=======
+>>>>>>> initial commit after forking
 select   
      i_item_id
     ,i_item_desc
@@ -17,8 +20,13 @@ select
    ,store
    ,item
  where
+<<<<<<< HEAD
      d1.d_moy               = 4 
  and d1.d_year              = 1999
+=======
+     d1.d_moy               = 2 
+ and d1.d_year              = 2000
+>>>>>>> initial commit after forking
  and d1.d_date_sk           = ss_sold_date_sk
  and i_item_sk              = ss_item_sk
  and s_store_sk             = ss_store_sk
@@ -26,12 +34,21 @@ select
  and ss_item_sk             = sr_item_sk
  and ss_ticket_number       = sr_ticket_number
  and sr_returned_date_sk    = d2.d_date_sk
+<<<<<<< HEAD
  and d2.d_moy               between 4 and  4 + 3 
  and d2.d_year              = 1999
  and sr_customer_sk         = cs_bill_customer_sk
  and sr_item_sk             = cs_item_sk
  and cs_sold_date_sk        = d3.d_date_sk     
  and d3.d_year              in (1999,1999+1,1999+2)
+=======
+ and d2.d_moy               between 2 and  2 + 3 
+ and d2.d_year              = 2000
+ and sr_customer_sk         = cs_bill_customer_sk
+ and sr_item_sk             = cs_item_sk
+ and cs_sold_date_sk        = d3.d_date_sk     
+ and d3.d_year              in (2000,2000+1,2000+2)
+>>>>>>> initial commit after forking
  group by
     i_item_id
    ,i_item_desc
@@ -43,5 +60,8 @@ select
    ,s_store_id
    ,s_store_name
  limit 100;
+<<<<<<< HEAD
 
 -- end query 1 in stream 0 using template query29.tpl
+=======
+>>>>>>> initial commit after forking

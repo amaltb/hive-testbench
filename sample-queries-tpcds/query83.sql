@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 -- start query 1 in stream 0 using template query83.tpl and seed 1930872976
+=======
+>>>>>>> initial commit after forking
 with sr_items as
  (select i_item_id item_id,
         sum(sr_return_quantity) sr_item_qty
@@ -7,12 +10,21 @@ with sr_items as
       date_dim
  where sr_item_sk = i_item_sk
  and   d_date    in 
+<<<<<<< HEAD
 	(select d_date
 	from date_dim
 	where d_week_seq in 
 		(select d_week_seq
 		from date_dim
 	  where d_date in ('1998-01-02','1998-10-15','1998-11-10')))
+=======
+        (select d_date
+        from date_dim
+        where d_week_seq in 
+                (select d_week_seq
+                from date_dim
+          where d_date in ('1998-01-02','1998-10-15','1998-11-10')))
+>>>>>>> initial commit after forking
  and   sr_returned_date_sk   = d_date_sk
  group by i_item_id),
  cr_items as
@@ -23,12 +35,21 @@ with sr_items as
       date_dim
  where cr_item_sk = i_item_sk
  and   d_date    in 
+<<<<<<< HEAD
 	(select d_date
 	from date_dim
 	where d_week_seq in 
 		(select d_week_seq
 		from date_dim
 	  where d_date in ('1998-01-02','1998-10-15','1998-11-10')))
+=======
+        (select d_date
+        from date_dim
+        where d_week_seq in 
+                (select d_week_seq
+                from date_dim
+          where d_date in ('1998-01-02','1998-10-15','1998-11-10')))
+>>>>>>> initial commit after forking
  and   cr_returned_date_sk   = d_date_sk
  group by i_item_id),
  wr_items as
@@ -39,12 +60,21 @@ with sr_items as
       date_dim
  where wr_item_sk = i_item_sk
  and   d_date    in 
+<<<<<<< HEAD
 	(select d_date
 	from date_dim
 	where d_week_seq in 
 		(select d_week_seq
 		from date_dim
 		where d_date in ('1998-01-02','1998-10-15','1998-11-10')))
+=======
+        (select d_date
+        from date_dim
+        where d_week_seq in 
+                (select d_week_seq
+                from date_dim
+                where d_date in ('1998-01-02','1998-10-15','1998-11-10')))
+>>>>>>> initial commit after forking
  and   wr_returned_date_sk   = d_date_sk
  group by i_item_id)
   select  sr_items.item_id
@@ -64,4 +94,7 @@ with sr_items as
          ,sr_item_qty
  limit 100;
 
+<<<<<<< HEAD
 -- end query 1 in stream 0 using template query83.tpl
+=======
+>>>>>>> initial commit after forking

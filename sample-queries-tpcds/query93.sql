@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 -- start query 1 in stream 0 using template query93.tpl and seed 1200409435
+=======
+
+>>>>>>> initial commit after forking
 select  ss_customer_sk
             ,sum(act_sales) sumsales
       from (select ss_item_sk
@@ -6,13 +10,24 @@ select  ss_customer_sk
                   ,ss_customer_sk
                   ,case when sr_return_quantity is not null then (ss_quantity-sr_return_quantity)*ss_sales_price
                                                             else (ss_quantity*ss_sales_price) end act_sales
+<<<<<<< HEAD
             from store_sales left outer join store_returns on (sr_item_sk = ss_item_sk
                                                                and sr_ticket_number = ss_ticket_number)
                 ,reason
             where sr_reason_sk = r_reason_sk
+=======
+            from store_sales left outer join store_returns on (store_returns.sr_item_sk = store_sales.ss_item_sk
+                                                               and store_returns.sr_ticket_number = store_sales.ss_ticket_number)
+                ,reason
+            where store_returns.sr_reason_sk = reason.r_reason_sk
+>>>>>>> initial commit after forking
               and r_reason_desc = 'Did not like the warranty') t
       group by ss_customer_sk
       order by sumsales, ss_customer_sk
 limit 100;
 
+<<<<<<< HEAD
 -- end query 1 in stream 0 using template query93.tpl
+=======
+
+>>>>>>> initial commit after forking

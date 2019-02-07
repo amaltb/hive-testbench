@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 -- start query 1 in stream 0 using template query42.tpl and seed 1819994127
 select  dt.d_year
  	,item.i_category_id
  	,item.i_category
  	,sum(ss_ext_sales_price)
+=======
+select  dt.d_year
+ 	,item.i_category_id
+ 	,item.i_category
+ 	,sum(ss_ext_sales_price) as s
+>>>>>>> initial commit after forking
  from 	date_dim dt
  	,store_sales
  	,item
@@ -14,9 +21,17 @@ select  dt.d_year
  group by 	dt.d_year
  		,item.i_category_id
  		,item.i_category
+<<<<<<< HEAD
  order by       sum(ss_ext_sales_price) desc,dt.d_year
+=======
+ order by       s desc,dt.d_year
+>>>>>>> initial commit after forking
  		,item.i_category_id
  		,item.i_category
 limit 100 ;
 
+<<<<<<< HEAD
 -- end query 1 in stream 0 using template query42.tpl
+=======
+
+>>>>>>> initial commit after forking

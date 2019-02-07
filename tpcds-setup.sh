@@ -65,6 +65,7 @@ if [ $? -ne 0 ]; then
 	echo "Data generation failed, exiting."
 	exit 1
 fi
+<<<<<<< HEAD
 
 hadoop fs -chmod -R 777  ${DIR}/${SCALE}
 
@@ -75,6 +76,13 @@ HIVE="beeline -n hive -u 'jdbc:hive2://localhost:2181/;serviceDiscoveryMode=zooK
 # Create the text/flat tables as external tables. These will be later be converted to ORCFile.
 echo "Loading text data into external tables."
 runcommand "$HIVE  -i settings/load-flat.sql -f ddl-tpcds/text/alltables.sql --hivevar DB=tpcds_text_${SCALE} --hivevar LOCATION=${DIR}/${SCALE}"
+=======
+echo "TPC-DS text data generation complete."
+
+# Create the text/flat tables as external tables. These will be later be converted to ORCFile.
+echo "Loading text data into external tables."
+runcommand "hive -i settings/load-flat.sql -f ddl-tpcds/text/alltables.sql -d DB=tpcds_text_${SCALE} -d LOCATION=${DIR}/${SCALE}"
+>>>>>>> initial commit after forking
 
 # Create the partitioned and bucketed tables.
 if [ "X$FORMAT" = "X" ]; then
@@ -98,30 +106,50 @@ REDUCERS=$((test ${SCALE} -gt ${MAX_REDUCERS} && echo ${MAX_REDUCERS}) || echo $
 # Populate the smaller tables.
 for t in ${DIMS}
 do
+<<<<<<< HEAD
 	COMMAND="$HIVE  -i settings/load-partitioned.sql -f ddl-tpcds/bin_partitioned/${t}.sql \
 	    --hivevar DB=tpcds_bin_partitioned_${FORMAT}_${SCALE} --hivevar SOURCE=tpcds_text_${SCALE} \
             --hivevar SCALE=${SCALE} \
 	    --hivevar REDUCERS=${REDUCERS} \
 	    --hivevar FILE=${FORMAT}"
+=======
+	COMMAND="hive -i settings/load-partitioned.sql -f ddl-tpcds/bin_partitioned/${t}.sql \
+	    -d DB=tpcds_bin_partitioned_${FORMAT}_${SCALE} -d SOURCE=tpcds_text_${SCALE} \
+            -d SCALE=${SCALE} \
+	    -d REDUCERS=${REDUCERS} \
+	    -d FILE=${FORMAT}"
+>>>>>>> initial commit after forking
 	echo -e "${t}:\n\t@$COMMAND $SILENCE && echo 'Optimizing table $t ($i/$total).'" >> $LOAD_FILE
 	i=`expr $i + 1`
 done
 
 for t in ${FACTS}
 do
+<<<<<<< HEAD
 	COMMAND="$HIVE  -i settings/load-partitioned.sql -f ddl-tpcds/bin_partitioned/${t}.sql \
 	    --hivevar DB=tpcds_bin_partitioned_${FORMAT}_${SCALE} \
             --hivevar SCALE=${SCALE} \
 	    --hivevar SOURCE=tpcds_text_${SCALE} --hivevar BUCKETS=${BUCKETS} \
 	    --hivevar RETURN_BUCKETS=${RETURN_BUCKETS} --hivevar REDUCERS=${REDUCERS} --hivevar FILE=${FORMAT}"
+=======
+	COMMAND="hive -i settings/load-partitioned.sql -f ddl-tpcds/bin_partitioned/${t}.sql \
+	    -d DB=tpcds_bin_partitioned_${FORMAT}_${SCALE} \
+            -d SCALE=${SCALE} \
+	    -d SOURCE=tpcds_text_${SCALE} -d BUCKETS=${BUCKETS} \
+	    -d RETURN_BUCKETS=${RETURN_BUCKETS} -d REDUCERS=${REDUCERS} -d FILE=${FORMAT}"
+>>>>>>> initial commit after forking
 	echo -e "${t}:\n\t@$COMMAND $SILENCE && echo 'Optimizing table $t ($i/$total).'" >> $LOAD_FILE
 	i=`expr $i + 1`
 done
 
+<<<<<<< HEAD
 make -j 1 -f $LOAD_FILE
 
 
 echo "Loading constraints"
 runcommand "$HIVE -f ddl-tpcds/bin_partitioned/add_constraints.sql --hivevar DB=tpcds_bin_partitioned_${FORMAT}_${SCALE}"
+=======
+make -j 2 -f $LOAD_FILE
+>>>>>>> initial commit after forking
 
 echo "Data loaded into database ${DATABASE}."

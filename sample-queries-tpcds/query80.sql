@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 -- start query 1 in stream 0 using template query80.tpl and seed 1819994127
+=======
+>>>>>>> initial commit after forking
 with ssr as
  (select  s_store_id as store_id,
           sum(ss_ext_sales_price) as sales,
@@ -12,7 +15,11 @@ with ssr as
      promotion
  where ss_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date) 
+<<<<<<< HEAD
                   and (cast('1998-08-04' as date) +  30 days)
+=======
+                  and (cast('1998-09-04' as date))
+>>>>>>> initial commit after forking
        and ss_store_sk = s_store_sk
        and ss_item_sk = i_item_sk
        and i_current_price > 50
@@ -33,7 +40,11 @@ with ssr as
      promotion
  where cs_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
+<<<<<<< HEAD
                   and (cast('1998-08-04' as date) +  30 days)
+=======
+                  and (cast('1998-09-04' as date))
+>>>>>>> initial commit after forking
         and cs_catalog_page_sk = cp_catalog_page_sk
        and cs_item_sk = i_item_sk
        and i_current_price > 50
@@ -54,7 +65,11 @@ group by cp_catalog_page_id)
      promotion
  where ws_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
+<<<<<<< HEAD
                   and (cast('1998-08-04' as date) +  30 days)
+=======
+                  and (cast('1998-09-04' as date))
+>>>>>>> initial commit after forking
         and ws_web_site_sk = web_site_sk
        and ws_item_sk = i_item_sk
        and i_current_price > 50
@@ -68,29 +83,48 @@ group by web_site_id)
         , sum(profit) as profit
  from 
  (select 'store channel' as channel
+<<<<<<< HEAD
         , 'store' || store_id as id
+=======
+        , concat('store', store_id) as id
+>>>>>>> initial commit after forking
         , sales
         , returns
         , profit
  from   ssr
  union all
  select 'catalog channel' as channel
+<<<<<<< HEAD
         , 'catalog_page' || catalog_page_id as id
+=======
+        , concat('catalog_page', catalog_page_id) as id
+>>>>>>> initial commit after forking
         , sales
         , returns
         , profit
  from  csr
  union all
  select 'web channel' as channel
+<<<<<<< HEAD
         , 'web_site' || web_site_id as id
+=======
+        , concat('web_site', web_site_id) as id
+>>>>>>> initial commit after forking
         , sales
         , returns
         , profit
  from   wsr
  ) x
+<<<<<<< HEAD
  group by rollup (channel, id)
  order by channel
          ,id
  limit 100;
 
 -- end query 1 in stream 0 using template query80.tpl
+=======
+ group by channel, id with rollup
+ order by channel
+         ,id
+ limit 100;
+>>>>>>> initial commit after forking

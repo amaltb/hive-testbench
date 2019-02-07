@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 -- start query 1 in stream 0 using template query66.tpl and seed 2042478054
+=======
+
+>>>>>>> initial commit after forking
 select   
          w_warehouse_name
  	,w_warehouse_sq_ft
@@ -45,15 +49,24 @@ select
  	,sum(nov_net) as nov_net
  	,sum(dec_net) as dec_net
  from (
+<<<<<<< HEAD
     (select 
+=======
+    select 
+>>>>>>> initial commit after forking
  	w_warehouse_name
  	,w_warehouse_sq_ft
  	,w_city
  	,w_county
  	,w_state
  	,w_country
+<<<<<<< HEAD
  	,'DIAMOND' || ',' || 'AIRBORNE' as ship_carriers
        ,d_year as year
+=======
+ 	,concat('DIAMOND', ',', 'AIRBORNE') as ship_carriers
+        ,d_year as year
+>>>>>>> initial commit after forking
  	,sum(case when d_moy = 1 
  		then ws_sales_price* ws_quantity else 0 end) as jan_sales
  	,sum(case when d_moy = 2 
@@ -109,10 +122,17 @@ select
          ,time_dim
  	  ,ship_mode
      where
+<<<<<<< HEAD
             ws_warehouse_sk =  w_warehouse_sk
         and ws_sold_date_sk = d_date_sk
         and ws_sold_time_sk = t_time_sk
  	and ws_ship_mode_sk = sm_ship_mode_sk
+=======
+            web_sales.ws_warehouse_sk =  warehouse.w_warehouse_sk
+        and web_sales.ws_sold_date_sk = date_dim.d_date_sk
+        and web_sales.ws_sold_time_sk = time_dim.t_time_sk
+ 	and web_sales.ws_ship_mode_sk = ship_mode.sm_ship_mode_sk
+>>>>>>> initial commit after forking
         and d_year = 2002
  	and t_time between 49530 and 49530+28800 
  	and sm_carrier in ('DIAMOND','AIRBORNE')
@@ -124,16 +144,25 @@ select
  	,w_state
  	,w_country
        ,d_year
+<<<<<<< HEAD
  	)
  union all
     (select 
+=======
+ union all
+    select 
+>>>>>>> initial commit after forking
  	w_warehouse_name
  	,w_warehouse_sq_ft
  	,w_city
  	,w_county
  	,w_state
  	,w_country
+<<<<<<< HEAD
  	,'DIAMOND' || ',' || 'AIRBORNE' as ship_carriers
+=======
+        ,concat('DIAMOND', ',', 'AIRBORNE') as ship_carriers
+>>>>>>> initial commit after forking
        ,d_year as year
  	,sum(case when d_moy = 1 
  		then cs_ext_sales_price* cs_quantity else 0 end) as jan_sales
@@ -190,10 +219,17 @@ select
          ,time_dim
  	 ,ship_mode
      where
+<<<<<<< HEAD
             cs_warehouse_sk =  w_warehouse_sk
         and cs_sold_date_sk = d_date_sk
         and cs_sold_time_sk = t_time_sk
  	and cs_ship_mode_sk = sm_ship_mode_sk
+=======
+            catalog_sales.cs_warehouse_sk =  warehouse.w_warehouse_sk
+        and catalog_sales.cs_sold_date_sk = date_dim.d_date_sk
+        and catalog_sales.cs_sold_time_sk = time_dim.t_time_sk
+ 	and catalog_sales.cs_ship_mode_sk = ship_mode.sm_ship_mode_sk
+>>>>>>> initial commit after forking
         and d_year = 2002
  	and t_time between 49530 AND 49530+28800 
  	and sm_carrier in ('DIAMOND','AIRBORNE')
@@ -205,7 +241,10 @@ select
  	,w_state
  	,w_country
        ,d_year
+<<<<<<< HEAD
      ) 
+=======
+>>>>>>> initial commit after forking
  ) x
  group by 
         w_warehouse_name
@@ -219,4 +258,8 @@ select
  order by w_warehouse_name
  limit 100;
 
+<<<<<<< HEAD
 -- end query 1 in stream 0 using template query66.tpl
+=======
+
+>>>>>>> initial commit after forking

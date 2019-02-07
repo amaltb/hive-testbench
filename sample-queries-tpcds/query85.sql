@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -- start query 1 in stream 0 using template query85.tpl and seed 622697896
 select  substr(r_reason_desc,1,20)
        ,avg(ws_quantity)
@@ -13,6 +14,23 @@ select  substr(r_reason_desc,1,20)
    and cd2.cd_demo_sk = wr_returning_cdemo_sk
    and ca_address_sk = wr_refunded_addr_sk
    and r_reason_sk = wr_reason_sk
+=======
+
+select  substr(r_reason_desc,1,20) as r
+       ,avg(ws_quantity) wq
+       ,avg(wr_refunded_cash) ref
+       ,avg(wr_fee) fee
+ from web_sales, web_returns, web_page, customer_demographics cd1,
+      customer_demographics cd2, customer_address, date_dim, reason 
+ where web_sales.ws_web_page_sk = web_page.wp_web_page_sk
+   and web_sales.ws_item_sk = web_returns.wr_item_sk
+   and web_sales.ws_order_number = web_returns.wr_order_number
+   and web_sales.ws_sold_date_sk = date_dim.d_date_sk and d_year = 1998
+   and cd1.cd_demo_sk = web_returns.wr_refunded_cdemo_sk 
+   and cd2.cd_demo_sk = web_returns.wr_returning_cdemo_sk
+   and customer_address.ca_address_sk = web_returns.wr_refunded_addr_sk
+   and reason.r_reason_sk = web_returns.wr_reason_sk
+>>>>>>> initial commit after forking
    and
    (
     (
@@ -75,6 +93,7 @@ select  substr(r_reason_desc,1,20)
     )
    )
 group by r_reason_desc
+<<<<<<< HEAD
 order by substr(r_reason_desc,1,20)
         ,avg(ws_quantity)
         ,avg(wr_refunded_cash)
@@ -82,3 +101,9 @@ order by substr(r_reason_desc,1,20)
 limit 100;
 
 -- end query 1 in stream 0 using template query85.tpl
+=======
+order by r, wq, ref, fee
+limit 100;
+
+
+>>>>>>> initial commit after forking
